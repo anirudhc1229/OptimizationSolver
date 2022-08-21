@@ -1,4 +1,5 @@
 function [X, w, fval] = optimize2(S, V, r, n)
+    sphere_plt(S, r, n);
     fun = @(w)sum(w);
     w0 = zeros([1, n]);
     lb = zeros([1, n]);
@@ -13,4 +14,5 @@ function [X, w, fval] = optimize2(S, V, r, n)
     for i = 1:n
         X(i, :) = S(i, :) + w(i) * V(i, :);
     end
+    sphere_plt(X, r, n);
 end
