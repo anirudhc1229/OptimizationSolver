@@ -1,4 +1,4 @@
-function [X, fval] = optimize2(S, V, r, n)
+function [X, w, fval] = optimize2(S, V, r, n)
     fun = @(w)sum(w);
     w0 = zeros([1, n]);
     lb = zeros([1, n]);
