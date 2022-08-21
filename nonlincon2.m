@@ -4,7 +4,8 @@ function [c, ceq] = nonlincon2(w, S, V, r, n)
     idx = 1;
     for i = 1:n
         for j = (i+1):n
-            c(idx) = r(i) + r(j) - norm((S(i, :) + w(i) * V(i, :)) - (S(j, :) + w(j) * V(j, :)));
+            c(idx) = r(i) + r(j) - ...
+                norm((S(i, :) + w(i) * V(i, :)) - (S(j, :) + w(j) * V(j, :)));
             idx = idx + 1;
         end
     end
