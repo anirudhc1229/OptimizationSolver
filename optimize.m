@@ -1,11 +1,20 @@
-function [X, fval] = optimize(S, V, r, n)
-    fun = @(X)objective(X, S, n);
-%     fun = @(X)0;
-    nonlcon = @(X)constraints(X, S, V, r, n);
-    X0 = S;
+function [X, w, fval] = optimize(S, V, r, n)
+    sphere_plt(S, r, n);
+    tic
+    fun = @(w)sum(w);
+    w0 = zeros([1, n]);
+    lb = zeros([1, n]);
+    ub = ones([1, n]);
+    nonlcon = @(w)nonlincon2(w, S, V, r, n);
     options = optimoptions("fmincon",...
         "Algorithm","interior-point",...
         "EnableFeasibilityMode",true,...
         "SubproblemAlgorithm","cg");
-    [X, fval] = fmincon(fun, X0, [], [], [], [], [], [], nonlcon, options);
+    [w, fval] = fmincon(fun, w0, [], [], [], [], lb, ub, nonlcon, options);
+    X = zeros([n, 3]);
+    for i = 1:n
+        X(i, :) = S(i, :) + w(i) * V(i, :);
+    end
+    timeElapsed = toc
+    sphere_plt(X, r, n);
 end

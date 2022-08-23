@@ -1,4 +1,4 @@
-function [c, ceq] = nonlincon2(w, S, V, r, n)
+function [c, ceq] = nonlincon(w, S, V, r, n)
     c = zeros([1, n * (n - 1) / 2]);
     ceq = [];
     idx = 1;
