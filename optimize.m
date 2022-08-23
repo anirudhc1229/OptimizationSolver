@@ -1,11 +1,11 @@
-function [X, w, fval] = optimize(S, V, r, n)
+function [X, w, fval] = optimize2(S, V, r, n)
     sphere_plt(S, r, n);
     tic
     fun = @(w)sum(w);
     w0 = zeros([1, n]);
     lb = zeros([1, n]);
     ub = ones([1, n]);
-    nonlcon = @(w)nonlincon2(w, S, V, r, n);
+    nonlcon = @(w)nonlincon(w, S, V, r, n);
     options = optimoptions("fmincon",...
         "Algorithm","interior-point",...
         "EnableFeasibilityMode",true,...
