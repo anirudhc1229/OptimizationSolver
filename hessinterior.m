@@ -1,4 +1,4 @@
-function h = hessinterior(x, lambda, n, S, V)
+function h = hessinterior(w, lambda, n, V)
     hessf = zeros(n);
     hessc = zeros([n, n, n*(n-1)/2]);
     idx = 1;
