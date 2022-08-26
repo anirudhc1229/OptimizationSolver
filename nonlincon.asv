@@ -1,0 +1,27 @@
+function [c, ceq, gradc, gradceq] = nonlincon(w, S, V, r, n)
+
+    c = zeros([1, n * (n - 1) / 2]);
+    idx = 1;
+    for i = 1:n
+        for j = (i+1):n
+            lamb = [(r(i) + r(j))^2];
+            x = (S(i, :) + w(i) * V(i, :)) - (S(j, :) + w(j) * V(j, :));
+            c(idx) = lamb - x.' * x;
+            idx = idx + 1;
+        end
+    end
+    ceq = [];
+
+    if nargout > 2
+       gradc = zeros([n, n * (n - 1) / 2]);
+       idx = 1;
+       for i = 1:n
+           for j = (i+1):n
+               gradc(i, idx)
+               idx = idx + 1;
+           end
+       end
+       gradceq = [];
+    end
+
+end
