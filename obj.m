@@ -1,6 +1,6 @@
-function [f, gradf] = obj(w, n)
-    f = sum(w);
+function [f, gradf] = obj(w, p, n)
+    f = sum(w.*p);
     if nargout > 1
-        gradf = ones([1, n]);
+        gradf = p;
     end
 end

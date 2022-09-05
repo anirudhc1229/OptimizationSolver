@@ -1,7 +1,7 @@
-function [X, w, fval] = optimize(S, V, r, n)
+function [X, w, fval] = optimize(S, V, r, p, n)
     sphere_plt(S, r, n);
     tic
-    fun = @(w)obj(w, n);
+    fun = @(w)obj(w, p, n);
     w0 = zeros([1, n]);
     lb = zeros([1, n]);
     ub = ones([1, n]);
@@ -22,4 +22,5 @@ function [X, w, fval] = optimize(S, V, r, n)
     timeElapsed = toc
     disp([output.funcCount,output.iterations])
     sphere_plt(X, r, n);
+    w
 end
