@@ -1,7 +1,7 @@
-function [X, w, fval] = optimize(S, V, r, p, n)
+function [X, w, fval] = optimize(S, V, r, q, n)
     sphere_plt(S, r, n);
     tic
-    fun = @(w)obj(w, p, n);
+    fun = @(w)obj(w, q, n);
     w0 = zeros([1, n]);
     lb = zeros([1, n]);
     ub = ones([1, n]);
