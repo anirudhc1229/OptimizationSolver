@@ -1,12 +1,12 @@
-function [X, w, fval] = optimize(S, V, r, q, n)
+function [X, w, fval] = optimize(S, V, P, q, r, n)
     sphere_plt(S, r, n);
     tic
     fun = @(w)obj(w, q, n);
     w0 = zeros([1, n]);
     lb = zeros([1, n]);
     ub = ones([1, n]);
-    nonlcon = @(w)nonlincon(w, S, V, r, n);
-    hess = @(w, lambda)hessinterior(w, lambda, n, V);
+    nonlcon = @(w)nonlincon(w, S, V, P, r, n);
+    hess = @(w, lambda)hessinterior(w, lambda, n, V, P);
     options = optimoptions("fmincon",...
         "Algorithm","interior-point",...
         "EnableFeasibilityMode",true,...
