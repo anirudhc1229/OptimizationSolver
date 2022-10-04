@@ -1,5 +1,11 @@
 function [X, w, fval] = optimize(S, V, P, q, r, n)
-    sphere_plt(S, r, n);
+%     sphere_plt(S, r, n);
+    S
+    V
+    P
+    q
+    r
+    n
     tic
     fun = @(w)obj(w, q, n);
     w0 = zeros([1, n]);
@@ -13,7 +19,8 @@ function [X, w, fval] = optimize(S, V, P, q, r, n)
         "SubproblemAlgorithm","cg",...
         "SpecifyObjectiveGradient",true,...
         "SpecifyConstraintGradient",true,...
-        'HessianFcn', hess);
+        'HessianFcn', hess,...
+        "ConstraintTolerance",1e-5);
     [w,fval,eflag,output] = fmincon(fun, w0, [], [], [], [], lb, ub, nonlcon, options);
     X = zeros([n, 3]);
     for i = 1:n
@@ -21,6 +28,6 @@ function [X, w, fval] = optimize(S, V, P, q, r, n)
     end
     timeElapsed = toc
     disp([output.funcCount,output.iterations])
-    sphere_plt(X, r, n);
+%     sphere_plt(X, r, n);
     w
 end
